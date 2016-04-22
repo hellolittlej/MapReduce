@@ -20,7 +20,7 @@ public class TrustMapper extends Mapper<IntWritable, Node, IntWritable, NodeOrDo
             //note that v is the current node, that is the value;
             Edge edge = new Edge(InNeighbor, value);
             //send out the BE;
-            context.write(new IntWritable(blockID), edge);
+            context.write(new IntWritable(blockID), new NodeOrBeOrBc(edge));
         }
         //get the BoundaryCondition;
         for(Node outNeighbor : value.getOutBlock()) {
@@ -28,9 +28,8 @@ public class TrustMapper extends Mapper<IntWritable, Node, IntWritable, NodeOrDo
             double uPR = outNeighbor.getPageRank();
             double R =uPR / outNeighbor.getDegree();
             bc.setRvalue(R);
-            context.write(new IntWritable(blockID), bc);
+            context.write(new IntWritable(blockID), new NodeOrBeOrBc(bc);
         }
-           
-
+        context.write(key, new NodeOrBeOrBc(value));        
     }
 }

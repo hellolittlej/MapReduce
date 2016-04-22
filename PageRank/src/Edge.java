@@ -9,7 +9,7 @@ import org.apache.hadoop.util.*;
 import org.apache.hadoop.mapreduce.Counter;
 
 
-public class BoundaryCondition {df
+public class BoundaryCondition {
     private Node OutBound;
     private Node InBound;
     private Double R;
