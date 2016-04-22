@@ -12,6 +12,6 @@ public class TrustReducer extends Reducer<IntWritable, NodeOrDouble, IntWritable
     
     public void reduce(IntWritable key, Iterable<NodeOrBeOrBc> values, Context context)
         throws IOException, InterruptedException {
-        
+        //
     }
 }

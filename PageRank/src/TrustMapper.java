@@ -30,6 +30,7 @@ public class TrustMapper extends Mapper<IntWritable, Node, IntWritable, NodeOrDo
             bc.setRvalue(R);
             context.write(new IntWritable(blockID), new NodeOrBeOrBc(bc);
         }
-        context.write(key, new NodeOrBeOrBc(value));        
+        //pass out the old pagerank;
+        context.write(new IntWritable(blockID), new NodeOrBeOrBc(value));        
     }
 }
