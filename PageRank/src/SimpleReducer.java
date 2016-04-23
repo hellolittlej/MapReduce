@@ -10,15 +10,22 @@ import org.apache.hadoop.util.*;
 
 public class LeftoverReducer extends Reducer<IntWritable, Node, IntWritable, Node> {
     public static double alpha = 0.85;
-    public void reduce(IntWritable nid, Iterable<Node> Ns, Context context) throws IOException, InterruptedException {
-        //Implement
-        for(Node n : Ns) {
-           long G = context.getConfiguration().getLong("size", 1);
-           double m = ((double)
-             (context.getConfiguration().getLong("leftover", 0)))/((double)(Integer.MAX_VALUE));
-           double prank = alpha / G + (1 - alpha) * (m / G + n.getPageRank());
-           n.setPageRank(prank);
-           context.write(new IntWritable(n.nodeid), n);
+    public void reduce(IntWritable key, Iterable<NodeOrDouble> values, Context context) throws IOException, InterruptedException {
+        //Implement;
+        double pagerank = 0.0;
+        Node n = new Node();
+        for(NodeOrDouble val : values) {
+            if(val.isNode()) {
+                n = val; 
+            }
+            else {
+                pagerank += val;
+            }
         }
+        double error = Math.abs(n.getPageRank() - pagerank) / pagerank;
+        //the counter of the context can only be the long value;
+        context.getCounter(LossCounter.counter.SimpleError.increment((long)(Integer.MAX_VALUE * error));
+        n.setPageRank(pagerank);
+        context.write(new IntWritable(n.nodeID), n);
     }
 }

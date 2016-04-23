@@ -12,7 +12,7 @@ import org.apache.hadoop.mapreduce.Counter;
 public class LossCounter {
     public static enum counter{
         SIZE,
-        ResiError
+        SimpleError;
     }
 }
 

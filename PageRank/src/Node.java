@@ -6,10 +6,12 @@ public class Node implements Iterable<Integer>, Writable{
     int nodeID;
     int blockID;
     double PageRank;
-    int[] OutGoing;
+    //outgoing id of the nodex;
+    int[] Outgoing;
 
     //public int getBlockID(){}  //get the blockID
     //public int getID(){}       //get the nodeID;
+    //public int getOutSize()    //get the outging size;
     //public set getInBlock()  //get the neighbor in the in block
     //public set getOutBlock()  //get the neighbor in the out block
 
